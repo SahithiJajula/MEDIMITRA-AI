@@ -4,6 +4,55 @@ st.set_page_config(
     page_title="MediMitra AI", page_icon="🏥", layout="centered"
 )
 
+# --- CUSTOM CSS FOR MODERN DARK UI & GLASSMORPHISM ---
+st.markdown(
+    """
+    <style>
+    /* Main background & font styling */
+    .stApp {
+        background-color: #0d1117;
+        color: #e6edf3;
+    }
+    
+    /* Chat message container styling */
+    .stChatMessage {
+        background-color: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 12px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* Custom Header Container */
+    .hero-container {
+        background: linear-gradient(135deg, #1f6feb 0%, #238636 100%);
+        padding: 25px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Buttons styling */
+    .stButton > button {
+        background-color: #21262d;
+        color: #c9d1d9;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    .stButton > button:hover {
+        background-color: #30363d;
+        border-color: #58a6ff;
+        color: #58a6ff;
+    }
+    </style>
+""",
+    unsafe_allow_html=True,
+)
+
 # Initialize language state
 if "language" not in st.session_state:
     st.session_state.language = None
@@ -48,9 +97,16 @@ ui_texts = {
 
 # Step 1: Language Selection Prompt if not chosen yet
 if st.session_state.language is None:
-    st.title("🏥 MediMitra AI")
-    st.caption("Regional Language Voice & Text Healthcare Triage | GNITS")
-    
+    st.markdown(
+        """
+        <div class="hero-container">
+            <h1>🏥 MediMitra AI</h1>
+            <p>Empowering Rural Healthcare with Multilingual AI Triage</p>
+        </div>
+    """,
+        unsafe_allow_html=True,
+    )
+
     st.info("🙏 **Namaste! Welcome to MediMitra AI.**")
     st.subheader(
         "Please select your preferred language to continue / कृपया अपनी भाषा चुनें / దయచేసి మీ భాషను ఎంచుకోండి:"
@@ -96,14 +152,21 @@ else:
     current_lang = st.session_state.language
     text = ui_texts[current_lang]
 
-    # Render translated header elements
-    st.title(text["title"])
-    st.caption(text["caption"])
+    # Render styled hero header
+    st.markdown(
+        f"""
+        <div class="hero-container">
+            <h2>{text['title']}</h2>
+            <p>{text['caption']}</p>
+        </div>
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Top status bar showing selected language with localized reset option
     col_lang, col_reset = st.columns([3, 1])
     with col_lang:
-        st.write(f"🌐 **{text['selected_lang']}** {current_lang}")
+        st.write(f"🌐 **{text['selected_lang']}** `{current_lang}`")
     with col_reset:
         if st.button(text["change_btn"], type="secondary"):
             st.session_state.language = None
