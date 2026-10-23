@@ -4,7 +4,7 @@ st.set_page_config(
     page_title="MediMitra AI", page_icon="🏥", layout="centered"
 )
 
-# --- CUSTOM CSS FOR MODERN DARK UI & GLASSMORPHISM ---
+# --- CUSTOM CSS FOR MODERN DARK UI & VISIBLE TEXT ---
 st.markdown(
     """
     <style>
@@ -14,13 +14,10 @@ st.markdown(
         color: #e6edf3;
     }
     
-    /* Chat message container styling */
-    .stChatMessage {
-        background-color: #161b22;
-        border: 1px solid #30363d;
-        border-radius: 12px;
-        padding: 10px;
-        margin-bottom: 10px;
+    /* Make chat message text bright white and fully visible */
+    .stChatMessage p {
+        color: #ffffff !important;
+        font-size: 16px;
     }
 
     /* Custom Header Container */
@@ -37,7 +34,7 @@ st.markdown(
     /* Buttons styling */
     .stButton > button {
         background-color: #21262d;
-        color: #c9d1d9;
+        color: #ffffff;
         border: 1px solid #30363d;
         border-radius: 8px;
         font-weight: 600;
